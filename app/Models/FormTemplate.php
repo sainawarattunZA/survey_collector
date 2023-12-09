@@ -8,17 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class FormTemplate extends Model
 {
-    use HasFactory,HasUlids;
+    use HasFactory, HasUlids;
 
     protected $fillable = [
         'name',
         'content',
     ];
-    public function forms(){
+    public function forms()
+    {
         return $this->hasMany(Form::class);
     }
 
     protected $casts = [
         'content' => 'array',
+        // 'id' => 'string',
     ];
 }

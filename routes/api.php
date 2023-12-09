@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\RegionController;
 use App\Http\Controllers\Api\QuarterController;
 use App\Http\Controllers\Api\TownshipController;
+use App\Http\Controllers\Api\FormBuilderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware('auth:sanctum')->group(function () {
+    // Route::apiResource('/formbuilders', FormBuilderController::class)
+    // ->parameters([
+    //     'id' => 'FormTemplate:id', // Use 'post' as the route parameter name and 'uuid' as the column name in the database
+    // ]);;
+    Route::get('/formbuilders/{formtemplate}', [FormBuilderController::class, 'show']);
 });
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
