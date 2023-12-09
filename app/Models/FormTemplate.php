@@ -21,6 +21,5 @@ class FormTemplate extends Model
 
     protected $casts = [
         'content' => 'array',
-        // 'id' => 'string',
     ];
 }

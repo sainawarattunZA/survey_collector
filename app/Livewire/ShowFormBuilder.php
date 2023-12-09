@@ -25,7 +25,7 @@ class ShowFormBuilder extends Component
         $this->content = json_decode($message);
 
         Form::create([
-            'form_id' => $this->record_id,
+            'form_template_id' => $this->record_id,
             'form' => @json_encode($this->content)
         ]);
         return redirect()->route('filament.admin.pages.list-form-builder');

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('forms', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->foreignUlid('form_id')->constrained('form_templates')->onDelete('cascade');
+            $table->foreignUlid('form_template_id')->constrained('form_templates')->onDelete('cascade');
             $table->JSON('form');
             $table->timestamps();
         });

@@ -9,6 +9,7 @@ use Filament\Tables\Actions\Action;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
+use Filament\Tables\Actions\DeleteAction;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Tables\Concerns\InteractsWithTable;
 
@@ -23,15 +24,19 @@ class ListForm extends Component implements HasForms, HasTable
             ->query(Form::query())
             ->columns([
                 TextColumn::make('id')->rowIndex(),
-                TextColumn::make('form.name')->sortable()->label('Form Name'),
+                TextColumn::make('form_template.name')->sortable()->label('Form Name'),
             ])
             ->filters([
                 // ...
             ])
             ->actions([
                 Action::make('View')
-                ->icon('heroicon-m-eye')
-                ->url(fn (Form $record): string => route('filament.admin.pages.show-form', ['record' => $record])),
+                    ->icon('heroicon-m-eye')
+                    ->url(fn (Form $record): string => route('filament.admin.pages.show-form', ['record' => $record])),
+                Action::make('edit')
+                    ->icon('heroicon-o-pencil')
+                    ->url(fn (Form $record): string => route('filament.admin.pages.edit-form', ['record' => $record])),
+                DeleteAction::make('delete')
             ])
             ->bulkActions([
                 // ...

@@ -8,20 +8,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Form extends Model
 {
-    use HasFactory,HasUlids;
+    use HasFactory, HasUlids;
 
     protected $casts = [
         'content' => 'array',
     ];
 
     protected $fillable = [
-        'form_id',
+        'form_template_id',
         'form',
         'created_at',
         'updated_at',
     ];
 
-    public function form(){
+
+    public function form_template()
+    {
         return $this->belongsTo(FormTemplate::class);
     }
 }
