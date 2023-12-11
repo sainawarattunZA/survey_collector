@@ -2,19 +2,20 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\UserResource\Pages;
-use App\Filament\Resources\UserResource\RelationManagers;
-use App\Models\Department;
-use App\Models\User;
 use Filament\Forms;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
+use App\Models\User;
 use Filament\Tables;
+use Filament\Forms\Form;
+use App\Models\Department;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Resources\Resource;
 use Illuminate\Support\Facades\Hash;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Section;
+use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\UserResource\Pages;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\UserResource\RelationManagers;
 
 class UserResource extends Resource
 {
@@ -39,18 +40,17 @@ class UserResource extends Resource
                             ->required()
                             ->maxLength(255)
                             ->inlineLabel(),
-                        Forms\Components\Select::make('role')
-                            ->required()
+                        Select::make('roles')
+                            ->relationship(name: 'roles', titleAttribute: 'name')
                             ->searchable()
-                            ->placeholder('Please Choose Role')
-                            ->options(collect(config('role'))->pluck('name','value')->toArray())
+                            ->preload()
                             ->inlineLabel(),
                         Forms\Components\Select::make('department_id')
                             ->label('Department')
                             ->required()
                             ->searchable()
                             ->placeholder('Please Choose Department')
-                            ->options(Department::query()->pluck('name','id'))
+                            ->options(Department::query()->pluck('name', 'id'))
                             ->inlineLabel(),
                         Forms\Components\TextInput::make('phone')
                             ->tel()
