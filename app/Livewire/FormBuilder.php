@@ -31,7 +31,7 @@ class FormBuilder extends Component implements HasForms
             'content' => $this->content
         ]);
 
-        // return redirect()->route('filament.admin.pages.show-form');
+        return redirect()->route('filament.admin.pages.list-form-builder');
     }
 
     public ?array $data = [];
